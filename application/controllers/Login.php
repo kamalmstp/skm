@@ -20,6 +20,10 @@ class Login extends CI_Controller {
         $this->load->view('login');
     }
 
+    public function eror() {
+        $this->load->view('layout/eror');
+    }
+
     function validate_login(){
         $username = $this->input->post('username');
         $password = $this->input->post('password');
@@ -35,13 +39,12 @@ class Login extends CI_Controller {
             redirect(site_url('admin/dashboard'), 'refresh');
         }
 
-        $this->session->set_flashdata('login_error', get_phrase('invalid_login'));
-        redirect(site_url('login'), 'refresh');
+        // $this->session->set_flashdata('login_error', 'invalid_login');
+        redirect(site_url('login/eror'), 'refresh');
     }
 
     function logout() {
         $this->session->sess_destroy();
-        $this->session->set_flashdata('logout_notification', 'logged_out');
         redirect(site_url('login'), 'refresh');
     }
 }

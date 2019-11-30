@@ -28,8 +28,39 @@ class Admin extends CI_Controller {
             redirect(site_url('login'), 'refresh');
 
         $page_data['page_name']  = 'dashboard';
-        $page_data['page_title'] = get_phrase('admin_dashboard');
+        $page_data['page_title'] = 'admin_dashboard';
         
-        $this->load->view('admin/index', $page_data);
+        $this->load->view('index', $page_data);
+    }
+
+    function dosen()
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $list1 = $this->db->get_where('jadwalfh', array('kode_matkul!=' => NULL))->result_array();
+
+        $page_data['page_name']  = 'daftar_dosen';
+        $page_data['page_title'] = 'daftar_dosen';
+        $page_data['list'] = $list1;
+        
+        $this->load->view('index', $page_data);
+    }
+
+    function matkul()
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+            
+        $matkul1 = $this->db
+                        ->select('*')
+                        ->group_by('kode_matkul')
+                        ->get('jadwalfh')->result_array();
+
+        $page_data['page_name'] = 'matkul';
+        $page_data['page_title'] = 'matkul';
+        $page_data['matkul'] = $matkul1;
+
+        $this->load->view('index', $page_data);
     }
 }

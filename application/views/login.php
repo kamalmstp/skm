@@ -16,7 +16,7 @@
     </head>
     <body>
         <div id="loginbox">            
-            <form id="loginform" class="form-vertical" action="<?php echo site_url('login/validate_login'); ?>">
+            <form id="loginform" method="post" class="form-vertical" action="<?php echo site_url('login/validate_login'); ?>">
 				 <div class="control-group normal_text"> <h3><img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Logo" /></h3></div>
                 <div class="control-group">
                     <div class="controls">
@@ -34,7 +34,8 @@
                 </div>
                 <div class="form-actions">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
-                    <span class="pull-right"><a type="submit" href="index.html" class="btn btn-success" /> Login</a></span>
+                    <button class="btn btn-success"  type="submit"> Login</button>
+
                 </div>
             </form>
             <form id="recoverform" action="#" class="form-vertical">
