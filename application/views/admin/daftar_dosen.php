@@ -1,7 +1,8 @@
 <div id="content-header">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Tables</a> </div>
+    <div id="breadcrumb"> <a href="" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Tables</a> </div>
     <h1>Table Dosen</h1>
+    <hr>
   </div>
 </div>
 <div class="container-fluid">
@@ -83,6 +84,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-      $('#my-example').dataTable();  
+      $('#my-example').dataTable(); 
   });
 </script>

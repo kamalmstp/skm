@@ -9,9 +9,5 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery.gritter.css'); ?>" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 
-
-
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>

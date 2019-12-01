@@ -2,6 +2,7 @@
   <div id="content-header">
     <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Table</a> </div>
     <h1>Table Mata Kuliah</h1>
+    <hr>
   </div>
 </div>
 <div class="container-fluid">
@@ -26,9 +27,7 @@
                   <th>
                     Semester
                   </th>
-                  <th>
-                    Aksi
-                  </th>
+
                 </tr>
               </thead>
             <tbody>
@@ -48,9 +47,7 @@
                 <td>
                   <?=$row['semester']?>
                 </td>
-                <td>
-                  
-                </td>
+
               </tr>
 
               <?php

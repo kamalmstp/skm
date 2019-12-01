@@ -4,20 +4,19 @@
 <html lang="en">
     
 <head>
-        <title>Matrix Admin</title><meta charset="UTF-8" />
+        <title>Login | SKMFH</title><meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" />
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-responsive.min.css'); ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/css/matrix-login.css'); ?>" />
         <link href="<?php echo base_url('assets/font-awesome/css/font-awesome.css'); ?>" rel="stylesheet" />
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
-        
 
     </head>
     <body>
         <div id="loginbox">            
             <form id="loginform" method="post" class="form-vertical" action="<?php echo site_url('login/validate_login'); ?>">
-				 <div class="control-group normal_text"> <h3><img src="<?php echo base_url('assets/img/logo.png'); ?>" alt="Logo" /></h3></div>
+				 <div class="control-group normal_text"> <h3><img src="<?php echo base_url('assets/img/ulm.png'); ?>" height="200" width="130px" alt="Logo" /></h3></div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
@@ -33,8 +32,7 @@
                     </div>
                 </div>
                 <div class="form-actions">
-                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
-                    <button class="btn btn-success"  type="submit"> Login</button>
+                    <button class="btn btn-success" type="submit"> Login</button>
 
                 </div>
             </form>

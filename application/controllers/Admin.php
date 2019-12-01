@@ -63,4 +63,15 @@ class Admin extends CI_Controller {
 
         $this->load->view('index', $page_data);
     }
+
+    function honor()
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $page_data['page_name'] = 'honor';
+        $page_data['page_title'] = 'honor';
+
+        $this->load->view('index', $page_data);
+    }
 }
