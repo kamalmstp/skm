@@ -29,9 +29,9 @@ hr{ border-top-color:#dadada;}
 /*Metro Background color class*/
 .bg_lb{ background:#27a9e3;}
 .bg_db{ background:#2295c9;}
-.bg_lg{ background:#28b779;}
+.bg_lg{ background:#FFF500;}
 .bg_dg{ background:#28b779;}
-.bg_ly{ background:#ffb848;}
+.bg_ly{ background:#000000;}
 .bg_dy{ background:#da9628;}
 .bg_ls{ background:#2255a4;}
 .bg_lo{ background:#da542e;}
@@ -39,8 +39,8 @@ hr{ border-top-color:#dadada;}
 .bg_lv{ background:#603bbc;}
 .bg_lh{ background:#b6b3b3;}
 
-body { background-color:#2E363F;    padding: 0;    margin-top:10%;}
-#logo, #loginbox {    width: 32%;    margin-left: auto;    margin-right: auto;    position: relative;}
+body { background-color:#3d444c;    padding: 0;    margin-top:5%;}
+#logo, #loginbox {    width: 35%;    margin-left: auto;    margin-right: auto;    position: relative;}
 #logo img {  margin: 0 auto;    display: block;}
 #loginbox { overflow: hidden !important;    text-align: left;    position: relative; }
 #loginbox form{ width:100%; background:#2E363F; position:relative; top:0; left:0; }

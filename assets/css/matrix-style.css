@@ -16,7 +16,7 @@ a:hover, a:focus {
 	text-decoration: none; color:#28b779;
 }
 .dropdown-menu .divider{ margin:4px 0px;}
-.dropdown-menu{ min-width:180px;}
+.dropdown-menu{ min-width:100px;}
 .dropdown-menu > li > a{ padding:3px 10px; color:#666; font-size:12px;}
 .dropdown-menu > li > a i{ padding-right:3px;}
 .userphoto img{ width:19px; height:19px;}
@@ -48,14 +48,14 @@ hr{ border-top-color:#dadada;}
 /* Header */
 #header {
 
-	height: 70px;
+	height: 77px;
 	position: relative;
 	width: 100%;
 	z-index: -9;
 }
 #header h1 {
 	background: url("../img/logo1.png") no-repeat scroll 0 0 transparent;
-	height: 70px;
+	height: 100%;
 	left: 20px;
 	line-height: 600px;
 	overflow: hidden;
@@ -1285,7 +1285,7 @@ form {
 	margin-top: -31px;
 	border-top:1px solid #363E48;
 	margin-bottom: 0px;
-	background:#2E363F;
+	background:#000000;
 	float:right;
 }
 .navbar > .nav {

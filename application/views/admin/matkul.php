@@ -8,55 +8,52 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="widget-box">
-          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5><?=$page_title?></h5>
-          </div>
-          <div class="widget-content nopadding">
-            <table id="my-example" class="table table-bordered data-table">
-              <thead>
-                <tr>
-                  <th>
-                    Kode Matkul
-                  </th>
-                  <th>
-                    Nama Matkul
-                  </th>
-                  <th>
-                    SKS
-                  </th>
-                  <th>
-                    Semester
-                  </th>
-
-                </tr>
-              </thead>
-            <tbody>
-              <?php
-              foreach ($matkul as $row):
-              ?>
-              <tr>
-                <td>
-                  <?=$row['kode_matkul']?>
-                </td>
-                <td>
-                  <?=$row['nama_matkul']?>
-                </td>
-                <td>
-                  <?=$row['sks']?>
-                </td>
-                <td>
-                  <?=$row['semester']?>
-                </td>
-
-              </tr>
-
-              <?php
-              endforeach;
-              ?>
-            </tbody>
-             </table>
-          </div>
-        </div>
+      <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+        <h5><?=$page_title?></h5>
+      </div>
+      <div class="widget-content nopadding">
+        <table id="my-example" class="table table-bordered data-table">
+          <thead>
+            <tr>
+              <th>
+                Kode Matkul
+              </th>
+              <th>
+                Nama Matkul
+              </th>
+              <th>
+                SKS
+              </th>
+              <th>
+                Semester
+              </th>
+            </tr>
+          </thead>
+        <tbody>
+          <?php
+          foreach ($matkul as $row):
+          ?>
+          <tr>
+            <td>
+              <?=$row['kode_matkul']?>
+            </td>
+            <td>
+              <?=$row['nama_matkul']?>
+            </td>
+            <td>
+              <?=$row['sks']?>
+            </td>
+            <td>
+              <?=$row['semester']?>
+            </td>
+          </tr>
+          <?php
+          endforeach;
+          ?>
+        </tbody>
+         </table>
+      </div>
+    </div>
   </div>
 </div>
 
