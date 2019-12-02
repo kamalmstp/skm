@@ -39,11 +39,26 @@ class Admin extends CI_Controller {
             redirect(site_url('login'), 'refresh');
 
         $list1 = $this->db->get_where('jadwalfh', array('kode_matkul!=' => NULL))->result_array();
+        $dosen = $this->db->select('DISTINCT(dosen1)')->get('jadwalfh')->result_array();
 
         $page_data['page_name']  = 'daftar_dosen';
-        $page_data['page_title'] = 'daftar_dosen';
-        $page_data['list'] = $list1;
+        $page_data['page_title'] = 'Daftar Dosen';
+        $page_data['dosen'] = $dosen;
         
+        $this->load->view('index', $page_data);
+    }
+
+    function detail_matkul($matkul){
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $data = str_replace('_', ' ', $matkul);
+        $cari = $this->db->get_where('jadwalfh', array('nama_matkul' => $data))->result_array();
+
+        $page_data['page_name']  = 'detail_matkul';
+        $page_data['page_title'] = 'Detail Matkul';
+        $page_data['lihat'] = $cari;
+
         $this->load->view('index', $page_data);
     }
 
@@ -53,8 +68,7 @@ class Admin extends CI_Controller {
             redirect(site_url('login'), 'refresh');
             
         $matkul1 = $this->db
-                        ->select('*')
-                        ->group_by('kode_matkul')
+                        ->select('DISTINCT(kode_matkul), nama_matkul, semester')
                         ->get('jadwalfh')->result_array();
 
         $page_data['page_name'] = 'matkul';

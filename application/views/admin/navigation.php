@@ -4,12 +4,10 @@
     
     <li class="<?php if ($page_name == 'dashboard') echo 'active'; ?>"><a href="<?=base_url()?>"><i class="icon icon-home"></i> <span>Dashboard</span></a>
     </li>
-    <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Dosen</span></a>
-      <ul>
-        <li class="<?php 
-    if ($page_name == 'daftar_dosen') echo 'active';?>"> <a href="<?=site_url('admin/dosen')?>">Daftar Dosen</a> </li>
-        <li class="<?php 
-    if ($page_name == 'honor') echo 'active';?>"> <a href="<?=site_url('admin/honor')?>">Honor</a> </li>
+    <li class="submenu <?php if ($page_name == 'daftar_dosen' || $page_name == 'honor') echo 'active';?>"> <a href="#"><i class="icon icon-file"></i> <span>Dosen</span></a>
+      <ul <?php if ($page_name == 'daftar_dosen' || $page_name == 'honor') echo 'style="display: block;"';?>>
+        <li class="<?php if ($page_name == 'daftar_dosen') echo 'active';?>"> <a href="<?=site_url('admin/dosen')?>">Daftar Dosen</a> </li>
+        <li class="<?php if ($page_name == 'honor') echo 'active';?>"> <a href="<?=site_url('admin/honor')?>">Honor</a> </li>
       </ul>
     </li>
     

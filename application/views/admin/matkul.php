@@ -15,6 +15,7 @@
         <table id="my-example" class="table table-bordered data-table">
           <thead>
             <tr>
+              <th>No</th>
               <th>
                 Kode Matkul
               </th>
@@ -22,18 +23,18 @@
                 Nama Matkul
               </th>
               <th>
-                SKS
-              </th>
-              <th>
                 Semester
               </th>
+              <th>Aksi</th>
             </tr>
           </thead>
         <tbody>
           <?php
+          $no = 1;
           foreach ($matkul as $row):
           ?>
           <tr>
+            <td><?=$no++;?></td>
             <td>
               <?=$row['kode_matkul']?>
             </td>
@@ -41,10 +42,10 @@
               <?=$row['nama_matkul']?>
             </td>
             <td>
-              <?=$row['sks']?>
-            </td>
-            <td>
               <?=$row['semester']?>
+            </td>
+            <td style="text-align: center;">
+              <div class="btn btn-warning btn-mini"><a href="<?php echo site_url().'/admin/detail_matkul/'.str_replace(' ', '_', $row['nama_matkul']); ?>"><i class="icon-eye-open"></i> Lihat</a></div>
             </td>
           </tr>
           <?php

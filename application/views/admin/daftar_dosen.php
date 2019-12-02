@@ -16,59 +16,30 @@
           <thead>
             <tr>
               <th>
-                Kode Matkul
+                No
               </th>
               <th>
-                Nama Matkul
+                Nama Dosen
               </th>
               <th>
-                Dosen 1
-              </th>
-              <th>
-                Dosen 2
-              </th>
-              <th>
-                Dosen 3
-              </th>
-              <th>
-                Dosen 4
-              </th>
-              <th>
-                Dosen 5
-              </th>
-              <th>
-                Dosen 6
+                Aksi
               </th>
             </tr>
           </thead>
         <tbody>
           <?php
-          foreach ($list as $row):
+          $no = 1;
+          foreach ($dosen as $row):
           ?>
           <tr>
             <td>
-              <?=$row['kode_matkul']?>
-            </td>
-            <td>
-              <?=$row['nama_matkul']?>
+              <?=$no++;?>
             </td>
             <td>
               <?=$row['dosen1']?>
             </td>
-            <td>
-              <?=$row['dosen2']?>
-            </td>
-            <td>
-              <?=$row['dosen3']?>
-            </td>
-            <td>
-              <?=$row['dosen4']?>
-            </td>
-            <td>
-              <?=$row['dosen5']?>
-            </td>
-            <td>
-              <?=$row['dosen6']?>
+            <td style="text-align: center;">
+              <div class="btn btn-warning btn-mini"><a href="<?php echo site_url().'/admin/lihat_dosen/'.$row['dosen1']; ?>"><i class="icon-eye-open"></i> Lihat</a></div>
             </td>
           </tr>
 
