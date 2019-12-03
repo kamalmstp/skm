@@ -95,7 +95,6 @@
              </table>
           </div>
           <div class="form-actions">
-
             <div class="buttons"> <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn btn-primary"><i class="icon-money"></i> TOTAL</a>
               <div class="modal hide" id="modal-add-event">
                 <div class="modal-header">

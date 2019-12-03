@@ -28,8 +28,10 @@
           </thead>
         <tbody>
           <?php
-          $no = 1;
-          foreach ($dosen as $row):
+            $no = 1;
+            foreach ($dosen as $row):
+            $db = $this->db->get_where('jadwalfh', array('dosen1' => $row['dosen1']), 1);
+            $id = $db->row();
           ?>
           <tr>
             <td>
@@ -39,7 +41,9 @@
               <?=$row['dosen1']?>
             </td>
             <td style="text-align: center;">
-              <div class="btn btn-warning btn-mini"><a href="<?php echo site_url().'/admin/lihat_dosen/'.$row['dosen1']; ?>"><i class="icon-eye-open"></i> Lihat</a></div>
+              <div class="btn btn-warning btn-mini">
+                <a href="<?=site_url().'admin/detail_dosen/'.$id->id;?>"><i class="icon-eye-open"></i> Lihat</a>
+              </div>
             </td>
           </tr>
 

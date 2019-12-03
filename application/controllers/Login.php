@@ -27,16 +27,20 @@ class Login extends CI_Controller {
     function validate_login(){
         $username = $this->input->post('username');
         $password = $this->input->post('password');
-        $credential = array('username' => $username, 'password' => sha1($password));
 
-        $query = $this->db->get_where('admin', $credential);
+        $credential = array('email' => $username);
+
+        $query = $this->db->get_where('users', $credential);
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            $this->session->set_userdata('admin_login', '1');
-            $this->session->set_userdata('admin_id', $row->admin_id);
-            $this->session->set_userdata('name', $row->name);
-            $this->session->set_userdata('login_type', 'admin');
-            redirect(site_url('admin/dashboard'), 'refresh');
+            $hash = $row->password;
+            if (password_verify($password, $hash)) {
+              $this->session->set_userdata('admin_login', '1');
+              $this->session->set_userdata('admin_id', $row->id);
+              $this->session->set_userdata('name', $row->name);
+              $this->session->set_userdata('login_type', 'admin');
+              redirect(site_url('admin/dashboard'), 'refresh');
+            }
         }
 
         // $this->session->set_flashdata('login_error', 'invalid_login');

@@ -48,6 +48,88 @@ class Admin extends CI_Controller {
         $this->load->view('index', $page_data);
     }
 
+    function detail_dosen($id){
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(site_url('login'), 'refresh');
+
+        $cari = $this->db->get_where('jadwalfh', array('id' => $id))->row();
+        $nama = $cari->dosen1;
+        $data = $this->db->get_where('jadwalfh', array('dosen1' => $nama))->result_array();
+        $data1 = $this->db->get_where('honor', array('nama_dosen' => $nama));
+        $data2 = $this->db->get_where('kelebihan', array('nama_dosen' => $nama));
+        $kelebihan = $data2->row();
+        $honor_sks = $data1->row();
+        
+        if ($data1->num_rows() > 0) {
+            $btn = "<a id='add-event' data-toggle='modal' href='#edit-honor'><span class='badge badge-warning'>Ubah</span></a>";
+            $honor = $honor_sks->honor_sks;
+            $honor_id = $honor_sks->id;
+        }else {
+            $btn = "<a id='add-event' data-toggle='modal' href='#add-honor'><span class='badge badge-warning'>Tambah</span></a>";
+            $honor = 0;
+            $honor_id = 0;
+        }
+        if ($data2->num_rows() > 0) {
+            $btn_k = "<a id='add-event' data-toggle='modal' href='#edit-kelebihan'><span class='badge badge-warning'>Ubah</span></a>";
+        } else {
+            $btn_k = "<a id='add-event' data-toggle='modal' href='#add-kelebihan'><span class='badge badge-warning'>Tambah</span></a>";
+        }
+        
+
+        $page_data['page_name']  = 'detail_dosen';
+        $page_data['page_title'] = 'Detail Dosen';
+        $page_data['dosen'] = $data;
+        $page_data['nama_dosen'] = $nama;
+        $page_data['info'] = $cari;
+        $page_data['honor'] = $honor;
+        $page_data['honor_id'] = $honor_id;
+        $page_data['btn'] = $btn;
+        $page_data['btn_k'] = $btn_k;
+
+        $this->load->view('index', $page_data);
+    }
+
+    function simpan_data($id){
+
+        $cari = $this->db->get_where('jadwalfh', array('id' => $id))->row();
+        $nama = $cari->dosen1;
+        $data['jadwal_id'] = $id;
+        $data['nama_dosen'] = $nama;
+        $data['jml_pertemuan'] = $this->input->post('jml_p');
+        $data['sks_max'] = $this->input->post('sks_m');
+
+        $this->db->insert('kelebihan', $data);
+
+        // $pesan = 'Data Berhasil Disimpan';
+        // $this->session->set_flashdata('msg' , '<div class="widget-content notify-ui"><ul id="gritter-notify"><li class="normal">'.$pesan.'</li></ul></div>');
+        redirect(site_url('admin/detail_dosen/'.$id), 'refresh');
+    }
+
+    function simpan_honor($id){
+
+        $cari = $this->db->get_where('jadwalfh', array('id' => $id))->row();
+        $nama = $cari->dosen1;
+        $data['nama_dosen'] = $nama;
+        $data['honor_sks'] = $this->input->post('honor_sks');
+
+        $this->db->insert('honor', $data);
+
+        // $pesan = 'Data Berhasil Disimpan';
+        // $this->session->set_flashdata('msg' , '<div class="widget-content notify-ui"><ul id="gritter-notify"><li class="normal">'.$pesan.'</li></ul></div>');
+        redirect(site_url('admin/detail_dosen/'.$id), 'refresh');
+    }
+
+    function update_honor($id){
+
+        $honor_id = $this->input->post('id');
+        $data['honor_sks'] = $this->input->post('honor_sks');
+
+        $this->db->where('id', $honor_id);
+        $this->db->update('honor', $data);
+        // $this->session->set_flashdata('flash_message' , 'Data Berhasil Disimpan');
+        redirect(site_url('admin/detail_dosen/'.$id), 'refresh');
+    }
+
     function detail_matkul($matkul){
         if ($this->session->userdata('admin_login') != 1)
             redirect(site_url('login'), 'refresh');
