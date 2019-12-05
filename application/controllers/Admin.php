@@ -147,7 +147,7 @@ class Admin extends CI_Controller {
         $nama = $cari->nama_dosen;
         $data = $this->db->get_where('jadwalfh', array('dosen1' => $nama))->result_array();
         $data1 = $this->db->get_where('honor', array('id_dosen' => $id));
-        $data2 = $this->db->get_where('kelebihan', array('id_dosen' => $id));
+        $data2 = $this->db->select('sum(jml_pertemuan) as jml_pertemuan, sum(jml_sks) as jml_sks')->where('id_dosen', $id)->get('kelebihan')->row();
         $honor_sks = $data1->row();
         
         if ($data1->num_rows() > 0) {
@@ -171,6 +171,8 @@ class Admin extends CI_Controller {
         $page_data['honor_id'] = $honor_id;
         $page_data['sks_max'] = $sks_max;
         $page_data['btn'] = $btn;
+        $page_data['total_p'] = $data2->jml_pertemuan;
+        $page_data['total_s'] = $data2->jml_sks;
 
         $this->load->view('index', $page_data);
     }
@@ -183,6 +185,7 @@ class Admin extends CI_Controller {
         $data['id_dosen'] = $id;
         $data['nama_dosen'] = $nama;
         $data['jml_pertemuan'] = $this->input->post('jml_p');
+        $data['jml_sks'] = $this->input->post('sks')/$this->input->post('jml_p');
         // $data['sks_max'] = $this->input->post('sks_m');
 
         $this->db->insert('kelebihan', $data);
@@ -224,6 +227,7 @@ class Admin extends CI_Controller {
         $id_dosen = $this->input->post('id_dosen');
         $data['jadwal_id'] = $id;
         $data['jml_pertemuan'] = $this->input->post('jml_p');
+        $data['jml_sks'] = $this->input->post('sks')/$this->input->post('jml_p');
         // $data['sks_max'] = $this->input->post('sks_m');
 
         $this->db->where('id', $idk);

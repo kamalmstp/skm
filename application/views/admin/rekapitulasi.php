@@ -49,15 +49,12 @@
                   <tbody>
                       <?php $no = 1;
                       foreach($nama as $row):
-                        $sql = $this->db->get_where('jadwalfh', array('dosen1' => $row['dosen1']));
-                        $matkul = $sql->num_rows();
-                        $sql1 = $this->db->select('sum(jml_pertemuan) as jml_p')
                       ?>
                       <tr>
                         <td><?=$no++;?></td>
-                        <td><?=$row['dosen1'];?></td>
-                        <td><?=$row['prodi'];?></td>
-                        <td><?=$jlh;?></td>
+                        <td><?=$row['nama_dosen'];?></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

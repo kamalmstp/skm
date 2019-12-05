@@ -58,9 +58,11 @@
                         $data = $get->row();
                         if ($get->num_rows() > 0) {
                             $jml_p = $data->jml_pertemuan;
+                            $jml_s = $data->jml_sks;
                             $btn_klbhn = "<a id='add-event' data-toggle='modal' href='#edit-kelebihan".$row['id']."'><span class='badge badge-warning'>Ubah</span></a>";
                         }else {
                             $jml_p = 0;
+                            $jml_s = 0;
                             $btn_klbhn = "<a id='add-event' data-toggle='modal' href='#add-kelebihan".$row['id']."'><span class='badge badge-warning'>Tambah</span></a>";
                         }
                       ?>
@@ -73,14 +75,14 @@
                         <td><?=$row['kelas'];?></td>
                         <!-- <td></td> -->
                         <td><?=$jml_p;?></td>
-                        <td><?=$jml_p * $row['sks'];?></td>
+                        <td><?=$jml_s;?></td>
                         <td><?=$btn_klbhn;?></td>
                       </tr>
                       <?php endforeach; ?>
                       <tr>
                         <td colspan="6"><strong>JUMLAH</strong></td>
-                        <td></td>
-                        <td></td>
+                        <td><strong><?=$total_p;?></strong></td>
+                        <td><strong><?=$total_s;?></strong></td>
                         <td></td>
                       </tr>
                   </tbody>
@@ -106,19 +108,32 @@
                           </div>
                         </div>
                       </td>
-                      <td class="right"><strong>Jumlah SKS</strong> <br>
-                        <strong>Jumlah Pertemuan</strong> <br>
-                        <strong>Jumlah Kelebihan SKS</strong>
+                      <td class="right"><strong>Total SKS</strong> <br>
+                        <strong>Total Pertemuan</strong> <br>
+                        <strong>Kelebihan SKS</strong>
                       </td>
-                      <td class="right"><strong> 0 <br>
-                         0 <br>
-                         0   </strong>
+                      <td class="right"><strong><?=$total_s;?><br>
+                         <?=$total_p;?> <br>
+                         <?php
+                          if ($sks_max > $total_s) {
+                            echo '0';
+                          }else {
+                            echo $total_s-$sks_max;
+                          }
+                         ?>
+                         </strong>
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="pull-right">
-                  <h4><span>Jumlah yang Dibayarkan :</span> Rp. 0,-</h4>
+                  <h4><span>Jumlah yang Dibayarkan :</span> Rp. <?php
+                          if ($sks_max > $total_s) {
+                            echo '0';
+                          }else {
+                            echo ($total_s-$sks_max)*$honor;
+                          }
+                         ?>,-</h4>
                   <br>
                   <a class="btn btn-primary btn-large pull-right" href="">Hitung</a>
                 </div>
@@ -202,6 +217,7 @@
                 <label class="control-label">Jumlah Pertemuan</label>
                 <div class="controls">
                 <input type="hidden" name="jadwal_id" value="<?=$row['id'];?>"/>
+                <input type="hidden" name="sks" value="<?=$row['sks'];?>"/>
                 <input type="text" name="jml_p" id="number" />
                 </div>
             </div>
@@ -231,6 +247,7 @@
               <div class="controls">
               <input type="hidden" name="id" value="<?=$r['id'];?>"/>
               <input type="hidden" name="id_dosen" value="<?=$r['id_dosen'];?>"/>
+              <input type="hidden" name="sks" value="<?=$row['sks'];?>"/>
               <input type="text" name="jml_p" id="number" value="<?=$r['jml_pertemuan'];?>"/>
               </div>
           </div>

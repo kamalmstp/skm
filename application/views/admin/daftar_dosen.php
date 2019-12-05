@@ -15,7 +15,7 @@
       <div class="widget-content nopadding">
         <ul class="bs-docs-tooltip-examples">
           <li class="span6">
-            <a class="btn btn-info btn-normal pull-left" href="<?=site_url('admin/dosen_get')?>">Perbarui Data Dosen</a>
+            <a class="btn btn-info btn-normal pull-left" href="<?=site_url('admin/dosen_get');?>">Perbarui Data Dosen</a>
           </li>
         </ul>
         <div class="row-fluid">
