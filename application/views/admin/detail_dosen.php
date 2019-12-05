@@ -45,7 +45,7 @@
                       <th class="head1 right">Prodi</th>
                       <th class="head0 right">Semester</th>
                       <th class="head0 right">Kelas</th>
-                      <th class="head0 right">Jml Tim Dosen</th>
+                      <!-- <th class="head0 right">Jml Tim Dosen</th> -->
                       <th class="head0 right">Jml Pertemuan</th>
                       <th class="head0 right">Jml SKS</th>
                       <th class="head0 right">SKS Maximum</th>
@@ -61,9 +61,11 @@
                         if ($get->num_rows() > 0) {
                             $jml_p = $data->jml_pertemuan;
                             $sks_m = $data->sks_max;
+                            $btn_klbhn = "<a id='add-event' data-toggle='modal' href='#edit-kelebihan".$row['id']."'><span class='badge badge-warning'>Ubah</span></a>";
                         }else {
                             $jml_p = 0;
                             $sks_m = 0;
+                            $btn_klbhn = "<a id='add-event' data-toggle='modal' href='#add-kelebihan'><span class='badge badge-warning'>Tambah</span></a>";
                         }
                       ?>
                       <tr>
@@ -73,23 +75,14 @@
                         <td><?=$row['prodi'];?></td>
                         <td><?=$row['semester'];?></td>
                         <td><?=$row['kelas'];?></td>
-                        <td></td>
+                        <!-- <td></td> -->
                         <td><?=$jml_p;?></td>
                         <td><?=$jml_p * $row['sks'];?></td>
                         <td><?=$sks_m;?></td>
                         <td><?=($jml_p * $row['sks']) - $sks_m;?></td>
-                        <td><?=$btn_k;?></td>
+                        <td><?=$btn_klbhn;?></td>
                       </tr>
                       <?php endforeach; ?>
-                      <!-- <tr>
-                          <td colspan="6"><b>JUMLAH</b></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                      </tr> -->
                   </tbody>
                 </table>
                 <table class="table table-bordered table-invoice-full">
@@ -121,30 +114,30 @@
           </div>
 
         <div class="modal hide" id="add-honor">
-        <form class="form-horizontal" method="post" action="<?php echo site_url('admin/simpan_honor/'.$info->id); ?>">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h3>Tambah Data</h3>
-            </div>
-            <div class="modal-body">
-                    <div class="control-group">
-                    <label class="control-label">Honor Per SKS</label>
-                    <div class="controls">
-                        <div class="input-prepend"> <span class="add-on">Rp</span>
-                        <input name="honor_sks" type="number" placeholder="0" class="span11">
+            <form class="form-horizontal" method="post" action="<?php echo site_url('admin/simpan_honor/'.$info->id_dosen); ?>">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Tambah Data</h3>
+                </div>
+                <div class="modal-body">
+                        <div class="control-group">
+                        <label class="control-label">Honor Per SKS</label>
+                        <div class="controls">
+                            <div class="input-prepend"> <span class="add-on">Rp</span>
+                            <input name="honor_sks" type="number" placeholder="0" class="span11">
+                            </div>
                         </div>
-                    </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-                <button id="add-honor" type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-        </form>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+                    <button id="add-honor" type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
         </div>
 
         <div class="modal hide" id="edit-honor">
-            <form class="form-horizontal" method="post" action="<?php echo site_url('admin/update_honor/'.$info->id); ?>">
+            <form class="form-horizontal" method="post" action="<?php echo site_url('admin/update_honor/'.$info->id_dosen); ?>">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <h3>Ubah Data</h3>
@@ -168,7 +161,7 @@
         </div>
 
         <div class="modal hide" id="add-kelebihan">
-            <form class="form-horizontal" method="post" action="<?php echo site_url('admin/simpan_data/'.$info->id); ?>">
+            <form class="form-horizontal" method="post" action="<?php echo site_url('admin/simpan_data/'.$info->id_dosen); ?>">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <h3>Tambah Data</h3>
@@ -194,8 +187,13 @@
             </form>
         </div>
 
-        <div class="modal hide" id="edit-kelebihan">
-            <form class="form-horizontal" method="post" action="<?php echo site_url('admin/update_data/'.$info->id); ?>">
+        <?php
+            foreach($dosen as $row){
+              $data1 = $this->db->get_where('kelebihan', array('jadwal_id' => $row['id']))->result_array();
+                foreach ($data1 as $r) {
+        ?>
+        <div class="modal hide" id="edit-kelebihan<?=$row['id'];?>">
+            <form class="form-horizontal" method="post" action="<?php echo site_url('admin/update_data/'.$row['id']); ?>">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <h3>Ubah Data</h3>
@@ -204,13 +202,15 @@
                 <div class="control-group">
                     <label class="control-label">Jumlah Pertemuan</label>
                     <div class="controls">
-                    <input type="text" name="jml_p" id="number" value=""/>
+                    <input type="hidden" name="id" value="<?=$r['id'];?>"/>
+                    <input type="hidden" name="id_dosen" value="<?=$r['id_dosen'];?>"/>
+                    <input type="text" name="jml_p" id="number" value="<?=$r['jml_pertemuan'];?>"/>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">SKS Maksimum</label>
                     <div class="controls">
-                    <input type="text" name="sks_m" id="number" value=""/>
+                    <input type="text" name="sks_m" id="number" value="<?=$r['sks_max'];?>"/>
                     </div>
                 </div>
             </div>
@@ -220,6 +220,8 @@
             </div>
             </form>
         </div>
+            <?php }
+        } ?>
 
         </div>
       </div>
