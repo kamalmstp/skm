@@ -146,19 +146,20 @@ class Admin extends CI_Controller {
         $cari = $this->db->get_where('dosen', array('id_dosen' => $id))->row();
         $nama = $cari->nama_dosen;
         $data = $this->db->get_where('jadwalfh', array('dosen1' => $nama))->result_array();
-        $data1 = $this->db->get_where('honor', array('nama_dosen' => $nama));
-        $data2 = $this->db->get_where('kelebihan', array('nama_dosen' => $nama));
-        $kelebihan = $data2->row();
+        $data1 = $this->db->get_where('honor', array('id_dosen' => $id));
+        $data2 = $this->db->get_where('kelebihan', array('id_dosen' => $id));
         $honor_sks = $data1->row();
         
         if ($data1->num_rows() > 0) {
             $btn = "<a id='add-event' data-toggle='modal' href='#edit-honor'><span class='badge badge-warning'>Ubah</span></a>";
             $honor = $honor_sks->honor_sks;
             $honor_id = $honor_sks->id;
+            $sks_max = $honor_sks->sks_max;
         }else {
             $btn = "<a id='add-event' data-toggle='modal' href='#add-honor'><span class='badge badge-warning'>Tambah</span></a>";
             $honor = 0;
             $honor_id = 0;
+            $sks_max = 0;
         }
 
         $page_data['page_name']  = 'detail_dosen';
@@ -168,6 +169,7 @@ class Admin extends CI_Controller {
         $page_data['info'] = $cari;
         $page_data['honor'] = $honor;
         $page_data['honor_id'] = $honor_id;
+        $page_data['sks_max'] = $sks_max;
         $page_data['btn'] = $btn;
 
         $this->load->view('index', $page_data);
@@ -177,10 +179,11 @@ class Admin extends CI_Controller {
 
         $cari = $this->db->get_where('dosen', array('id_dosen' => $id))->row();
         $nama = $cari->nama_dosen;
+        $data['jadwal_id'] = $this->input->post('jadwal_id');
         $data['id_dosen'] = $id;
         $data['nama_dosen'] = $nama;
         $data['jml_pertemuan'] = $this->input->post('jml_p');
-        $data['sks_max'] = $this->input->post('sks_m');
+        // $data['sks_max'] = $this->input->post('sks_m');
 
         $this->db->insert('kelebihan', $data);
 
@@ -194,6 +197,7 @@ class Admin extends CI_Controller {
         $data['id_dosen'] = $id;
         $data['nama_dosen'] = $nama;    
         $data['honor_sks'] = $this->input->post('honor_sks');
+        $data['sks_max'] = $this->input->post('sks_max');
 
         $this->db->insert('honor', $data);
 
@@ -206,6 +210,7 @@ class Admin extends CI_Controller {
 
         $honor_id = $this->input->post('id');
         $data['honor_sks'] = $this->input->post('honor_sks');
+        $data['sks_max'] = $this->input->post('sks_max');
 
         $this->db->where('id', $honor_id);
         $this->db->update('honor', $data);
@@ -219,7 +224,7 @@ class Admin extends CI_Controller {
         $id_dosen = $this->input->post('id_dosen');
         $data['jadwal_id'] = $id;
         $data['jml_pertemuan'] = $this->input->post('jml_p');
-        $data['sks_max'] = $this->input->post('sks_m');
+        // $data['sks_max'] = $this->input->post('sks_m');
 
         $this->db->where('id', $idk);
         $this->db->update('kelebihan', $data);

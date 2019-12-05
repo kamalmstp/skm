@@ -14,7 +14,17 @@
 
     </head>
     <body>
-        <div id="loginbox">            
+        <div id="loginbox">
+            <?php 
+            if ($this->session->flashdata('login_error') == 'Error') {
+                ?>
+                <div class="alert alert-error alert-block">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <h5 class="alert-heading">Username/Password Salah</h5>
+                </div>
+            <?php
+            }
+            ?>
             <form id="loginform" method="post" class="form-vertical" action="<?php echo site_url('login/validate_login'); ?>">
 				 <div class="control-group normal_text"> <img src="<?php echo base_url('assets/img/ulm2.png'); ?>" alt="Logo" /></div>
                  <hr>   

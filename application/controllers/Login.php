@@ -43,8 +43,8 @@ class Login extends CI_Controller {
             }
         }
 
-        // $this->session->set_flashdata('login_error', 'invalid_login');
-        redirect(site_url('login/eror'), 'refresh');
+        $this->session->set_flashdata('login_error', 'Error');
+        redirect(site_url('login'), 'refresh');
     }
 
     function logout() {
