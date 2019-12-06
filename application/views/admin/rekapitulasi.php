@@ -49,18 +49,75 @@
                   <tbody>
                       <?php $no = 1;
                       foreach($nama as $row):
+                        $sql = $this->db->select('sum(jml_pertemuan) as jml_pertemuan, sum(jml_sks) as jml_sks, count(jadwal_id) as jadwal_id')->where('id_dosen', $row['id_dosen'])->get('kelebihan');
+                        $sql1 = $this->db->select('sks_max, honor_sks')->where('id_dosen', $row['id_dosen'])->get('honor');
+                        $sql2 = $this->db->get_where('kelebihan', array('id_dosen' => $row['id_dosen']), 1);
+                        
+                        if ($sql->num_rows() > 0) {
+                          $data = $sql->row();
+                          if ($data->jadwal_id == 0) {
+                            $jp = '-';
+                            $js = '-';
+                            $jid = '-';
+                          }else {
+                            $jp = $data->jml_pertemuan;
+                            $js = $data->jml_sks;
+                            $jid = $data->jadwal_id;
+                          }
+                        }else {
+                          $jp = '-';
+                          $js = '-';
+                          $jid = '-';
+                        }
+
+                        if ($sql1->num_rows() > 0) {
+                          $data1 = $sql1->row();
+                          $sm = $data1->sks_max;
+                          $hs = $data1->honor_sks;
+                        }else {
+                          $sm = '-';
+                          $hs = '-';
+                        }
+
+                        if ($sql2->num_rows() > 0) {
+                          $data2 = $sql2->row();
+                          $sql3 = $this->db->get_where('jadwalfh', array('id' => $data2->jadwal_id))->row();
+                          $j_id = $data2->jadwal_id;
+                          $p = $sql3->prodi;
+                        }else {
+                          $j_id = '-';
+                          $p = '-';
+                        }
                       ?>
                       <tr>
                         <td><?=$no++;?></td>
                         <td><?=$row['nama_dosen'];?></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?=$p;?></td>
+                        <td><?=$jid;?></td>
+                        <td><?=$jp;?></td>
+                        <td><?=$js;?></td>
+                        <td><?=$sm;?></td>
+                        <td><?php
+                        if ($sm > $js) {
+                          echo '-';
+                        }elseif ($js > $sm) {
+                          echo $js-$sm;
+                        }else {
+                          echo '-';
+                        }
+                        ?></td>
+                        <td><?=$hs;?></td>
+                        <td>
+                          <?php
+                          if ($sm > $js) {
+                            echo '-';
+                          }elseif ($js > $sm) {
+                            echo ($js-$sm)*$hs;
+                          }else {
+                            echo '-';
+                          } 
+                          ?>
+                        </td>
                         <td></td>
                       </tr>
                       <?php endforeach; ?>
